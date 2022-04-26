@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { VscNotebook } from "react-icons/vsc";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogIn } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import scrollreveal from "scrollreveal";
@@ -30,12 +30,12 @@ export default function Sidebar() {
     .links>ul>li:nth-of-type(5),
     .links>ul>li:nth-of-type(6),
     .links>ul>li:nth-of-type(7),
-    .logout 
+    .login
     `,
       {
         opacity: 0,
         interval: 300,
-      }
+      },
     );
   }, []);
   return (
@@ -64,16 +64,22 @@ export default function Sidebar() {
             <SidebarMenu />
           </div>
         </div>
-        <div className="logout">
-          <a href="#">
-            <FiLogOut />
-            <span className="logout">Logout</span>
-          </a>
+        <div className="login">
+          <Link to="/login">
+            <FiLogIn />
+            <span className="login">Login</span>
+          </Link>
         </div>
       </Section>
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <div className="responsive__links">
           <SidebarMenu />
+        </div>
+        <div className="login">
+          <Link to="/login">
+            <FiLogIn />
+            <span className="login">Login</span>
+          </Link>
         </div>
       </ResponsiveNav>
     </>
@@ -154,7 +160,7 @@ const Section = styled.section`
     }
   }
 
-  .logout {
+  .login {
     padding: 0.3rem 1rem;
     border-radius: 0.6rem;
     &:hover {
@@ -192,7 +198,7 @@ const Section = styled.section`
       }
     }
     .top > .links,
-    .logout {
+    .login {
       display: none;
     }
   }
@@ -200,6 +206,9 @@ const Section = styled.section`
 
 const ResponsiveNav = styled.div`
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   right: -10vw;
   top: 0;
   z-index: 20;
@@ -223,7 +232,7 @@ const ResponsiveNav = styled.div`
         &:hover {
           background-color: #e1d0ff;
           a {
-            color: white;
+            color: black;
           }
         }
         a {
@@ -239,6 +248,21 @@ const ResponsiveNav = styled.div`
           color: black;
         }
       }
+    }
+  }
+
+  .login {
+    padding: 0.3rem 1rem;
+    border-radius: 0.6rem;
+    &:hover {
+      background-color: #f75c82;
+    }
+    a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
     }
   }
 `;

@@ -32,12 +32,12 @@ export default function Analytics() {
           <h2>30,000원</h2>
         </div>
         <div className="logo">
-          <BiGroup />
+          <IoStatsChart />
         </div>
       </div>
       <div className="analytic">
         <div className="logo">
-          <IoStatsChart />
+        <BiGroup />
         </div>
         <div className="content">
           <h5>친구</h5>

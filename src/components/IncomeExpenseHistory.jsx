@@ -25,7 +25,7 @@ export default function IncomeExpenseHistory() {
       content: "외식비",
       account: "12,000",
       inex: "지출",
-      memo: "q외식",
+      memo: "외식",
     },
   ]);
   const nextId = useRef(3);
@@ -44,8 +44,8 @@ export default function IncomeExpenseHistory() {
                 inex: "지출",
                 memo: "dk",
               }
-            : row
-        )
+            : row,
+        ),
       );
     } else {
       setData((info) =>
@@ -57,7 +57,7 @@ export default function IncomeExpenseHistory() {
           account: data.account,
           inex: "지출",
           memo: "dk",
-        })
+        }),
       );
       nextId.current += 1;
     }
@@ -77,12 +77,7 @@ export default function IncomeExpenseHistory() {
         <h2>입출금 내역</h2>
         <FaPen onClick={openModal} />
         {modalIsOpen && (
-          <Modal
-            visible={modalIsOpen}
-            closable={true}
-            maskClosable={true}
-            onClose={closeModal}
-          >
+          <Modal visible={modalIsOpen} closable={true} maskClosable={true} onClose={closeModal}>
             <InexPost onSaveData={handleSave} closeModal={closeModal} />
           </Modal>
         )}
@@ -155,7 +150,11 @@ const Section = styled.section`
           }
         }
       }
-      &:nth-of-type(2) {
+      &:nth-of-type(2),
+      &:nth-of-type(4),
+      &:nth-of-type(6),
+      &:nth-of-type(8),
+      &:nth-of-type(10) {
         border-top: 0.01rem solid #6c6e6e;
         border-bottom: 0.01rem solid #6c6e6e;
         padding: 0.8rem 0;

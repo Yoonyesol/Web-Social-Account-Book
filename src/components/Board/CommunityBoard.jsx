@@ -1,64 +1,73 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Tr from "./CommunityBoartTr";
 import Post from "./Post";
-import BoardModal from "./BoardModal";
+import Modal from "../Modal";
+
+import { FaPen } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import EditPost from "./EditPost";
 
 export default function CommunityBoard() {
-  const [board, setBoard] = useState([]);
+  const [board, setBoard] = useState([
+    {
+      id: 1,
+      title: "인하대 종설",
+      username: "김인하",
+      content: "게시판",
+      lastedit: "22.04.20",
+    },
+  ]);
+  // const [currentPage, setCurrentPage] = useState(1); //현재 페이지수
+  // const [postsPerPage] = useState(20); //한 페이지당 게시물 수
   const [selected, setSelected] = useState("");
   const [modalOn, setModalOn] = useState(false);
 
   // 고유 값으로 사용 될 id
   // ref 를 사용하여 변수 담기
-  const nextId = useRef(11);
+  const nextId = useRef(2);
+
+  //페이지 이동
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = board.slice(indexOfFirstPost, indexOfLastPost);
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   //더미 데이터 호출
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((res) => setBoard(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://jsonplaceholder.typicode.com/users")
+  //     .then((res) => setBoard(res.data))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const handleSave = (data) => {
+    //데이터 수정
     if (data.id) {
+      //수정데이터에는 id존재
       setBoard(
         board.map((row) =>
           data.id === row.id
             ? {
                 id: data.id,
-                name: data.name,
-                email: data.email,
-                phone: data.phone,
-                website: data.website,
+                title: data.title,
+                username: data.username,
+                content: data.content,
+                lastedit: "22.04.20",
               }
-            : row
-        )
+            : row,
+        ),
       );
     } else {
-      //바로 추가하기
-      // 데이터 추가하기 방법1
-      // setBoard((prev) => {
-      //   return [ ...prev, {
-      //     id: nextId.current,
-      //     name: data.name,
-      //     email: data.email,
-      //     phone: data.phone,
-      //     website: data.website
-      //   }]
-      // });
-
-      //데이터 추가하기 방법2
-      setBoard((info) =>
-        info.concat({
+      //id 존재하지 않을 시, 데이터 추가
+      setBoard((item) =>
+        item.concat({
           id: nextId.current,
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          website: data.website,
-        })
+          title: data.title,
+          username: data.username,
+          content: data.content,
+          lastedit: "22.04.20",
+        }),
       );
       nextId.current += 1;
     }
@@ -72,16 +81,12 @@ export default function CommunityBoard() {
     setModalOn(true);
     const selectedData = {
       id: item.id,
-      name: item.name,
-      email: item.email,
-      phone: item.phone,
-      website: item.website,
+      title: item.title,
+      username: item.username,
+      content: item.content,
+      lastedit: item.lastedit,
     };
     setSelected(selectedData);
-  };
-
-  const handleCancel = () => {
-    setModalOn(false);
   };
 
   const handleEditSubmit = (item) => {
@@ -89,33 +94,53 @@ export default function CommunityBoard() {
     setModalOn(false);
   };
 
+  function closeModal() {
+    setModalOn(false);
+  }
+
   return (
     <Section>
       <div className="title">
         <h2>커뮤니티</h2>
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Id.</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone No.</th>
-            <th>Website</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <Tr board={board} handleRemove={handleRemove} handleEdit={handleEdit} />
-      </table>
-      <Post onSaveData={handleSave} />
-      {modalOn && (
-        <BoardModal
-          selectedData={selected}
-          handleCancel={handleCancel}
-          handleEditSubmit={handleEditSubmit}
-        />
-      )}
+      <div className="board">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Id.</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>최종 수정일</th>
+              <th>수정</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            {board.map((item) => {
+              return (
+                <tr>
+                  <td>{item.id}</td>
+                  <td>{item.title}</td>
+                  <td>{item.username}</td>
+                  <td>{item.lastedit}</td>
+                  <td>
+                    <FaPen onClick={() => handleEdit(item.id)} />
+                  </td>
+                  <td>
+                    <FaTrashAlt onClick={() => handleRemove(item.id)} />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <Post onSaveData={handleSave} />
+        {modalOn && (
+          <Modal visible={modalOn} closable={true} maskClosable={true} onClose={closeModal}>
+            <EditPost selectedData={selected} handleCancel={closeModal} handleEditSubmit={handleEditSubmit} />
+          </Modal>
+        )}
+      </div>
     </Section>
   );
 }
@@ -131,6 +156,12 @@ const Section = styled.section`
       letter-spacing: 0.3rem;
     }
   }
+
+  .board {
+    display: flex;
+    flex-direction: column;
+  }
+
   .table {
     border-collapse: collapse;
     text-align: center;
@@ -155,6 +186,7 @@ const Section = styled.section`
     svg {
       width: 1rem;
       height: 1rem;
+      cursor: pointer;
     }
   }
 `;

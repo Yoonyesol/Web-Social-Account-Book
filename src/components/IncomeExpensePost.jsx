@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const InexPost = ({ onSaveData, closModal }) => {
+const InexPost = ({ onSaveData, closeModal }) => {
   const [form, setForm] = useState({
     ocr_img: "",
     category: "",
@@ -23,6 +23,7 @@ const InexPost = ({ onSaveData, closModal }) => {
     setForm(e.target.files[0]);
   };
 
+  //이미지 전송
   //   const onSubmit = e => {
   //     e.preventDefault();
   //     const formData = new FormData();
@@ -130,7 +131,7 @@ const InexPost = ({ onSaveData, closModal }) => {
           />
         </label>
         <div className="">
-          <button className="" type="submit" onClick={() => closModal}>
+          <button className="" type="submit" onClick={() => closeModal}>
             저장
           </button>
         </div>

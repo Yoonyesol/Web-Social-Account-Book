@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 const Post = ({ onSaveData }) => {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    website: "",
+    title: "",
+    username: "",
+    content: "",
+    editdate: "",
   });
 
   const handleChange = (e) => {
@@ -17,115 +18,92 @@ const Post = ({ onSaveData }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //페이지 이동 방지
     onSaveData(form);
     console.log(form);
     setForm({
-      name: "",
-      email: "",
-      phone: "",
-      website: "",
+      title: "",
+      username: "",
+      content: "",
+      editdate: "",
     });
   };
 
   return (
-    <>
-      <div className="text-xl font-bold mt-5 mb-2 text-center">
-        고객 추가하기
-      </div>
-      <form className="mt-3" onSubmit={handleSubmit}>
-        <div className="flex flex-col md:flex-row mb-1">
-          <label
-            htmlFor="username"
-            className="w-full flex-1 mx-2 text-xs font-semibold 
-                    text-gray-600 uppercase"
-          >
-            Name
+    <Section>
+      <h3>게시글 등록</h3>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="">
+          <label htmlFor="title" className="">
+            제목
             <input
-              className="w-full py-3 px-1 mt-1 
-                    text-gray-800 appearance-none 
-                    border-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+              className=""
               required
-              placeholder="이름을 입력해주세요"
+              placeholder="제목을 입력해주세요."
               type="text"
-              name="name"
-              value={form.name}
+              name="title"
+              value={form.title}
               onChange={handleChange}
             />
           </label>
-          <label
-            htmlFor="email"
-            className="w-full flex-1 mx-2 text-xs font-semibold 
-                    text-gray-600 uppercase"
-          >
-            Email
+          <label htmlFor="username" className="">
+            작성자
             <input
-              className="w-full py-3 px-1 mt-1 
-                    text-gray-800 appearance-none 
-                    border-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+              className=""
               required
-              placeholder="이메일 주소를 입력해주세요"
-              type="email"
-              name="email"
-              value={form.email}
+              placeholder="작성자"
+              type="text"
+              name="username"
+              value={form.username}
               onChange={handleChange}
             />
           </label>
+          <label htmlFor="content" className="">
+            내용
+            <input
+              className=""
+              required
+              placeholder="내용을 입력해주세요"
+              type="text"
+              name="content"
+              value={form.content}
+              onChange={handleChange}
+            />
+          </label>
+          <div>수정일: 220422</div>
         </div>
-        <div className="flex flex-col md:flex-row">
-          <label
-            htmlFor="phone"
-            className="w-full flex-1 mx-2 text-xs font-semibold 
-                    text-gray-600 uppercase"
-          >
-            Phone
-            <input
-              className="w-full py-3 px-1 mt-1 
-                    text-gray-800 appearance-none 
-                    border-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
-              required
-              placeholder="핸드폰 번호를 입력해주세요"
-              type="text"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-            />
-          </label>
-          <label
-            htmlFor="website"
-            className="w-full flex-1 mx-2 text-xs font-semibold 
-                    text-gray-600 uppercase"
-          >
-            Website
-            <input
-              className="w-full py-3 px-1 mt-1 
-                    text-gray-800 appearance-none 
-                    border-2 border-gray-100
-                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
-              required
-              placeholder="사이트 주소를 입력해주세요"
-              type="text"
-              name="website"
-              value={form.website}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="text-center">
-          <button
-            className="bg-blue-400 py-2 text-center px-10 md:px-12 md:py-3 text-white 
-                    rounded text-xl md:text-base mt-4"
-            type="submit"
-          >
-            저장
+        <div className="">
+          <button className="newPostBtn" type="submit">
+            작성
           </button>
         </div>
       </form>
-    </>
+    </Section>
   );
 };
 
 export default Post;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .newPostBtn {
+    float: right;
+    margin-right: 1rem;
+    background-color: #5d8de6;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    font-size: 1rem;
+    font-family: "Gowun Batang", serif;
+    color: white;
+    border-radius: 0.5rem;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+  }
+`;
