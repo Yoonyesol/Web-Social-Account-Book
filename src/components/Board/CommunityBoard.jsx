@@ -3,35 +3,33 @@ import styled from "styled-components";
 import axios from "axios";
 import Post from "./Post";
 import Modal from "../Modal";
+import { boardData } from "./BoardDummy";
+import Pagination from "./Pagination";
+import Tr from "./Tr";
 
 import { FaPen } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
-import EditPost from "./EditPost";
+import EditPostModal from "./EditPostModal";
 
 export default function CommunityBoard() {
-  const [board, setBoard] = useState([
-    {
-      id: 1,
-      title: "인하대 종설",
-      username: "김인하",
-      content: "게시판",
-      lastedit: "22.04.20",
-    },
-  ]);
-  // const [currentPage, setCurrentPage] = useState(1); //현재 페이지수
-  // const [postsPerPage] = useState(20); //한 페이지당 게시물 수
+  const [board, setBoard] = useState(boardData);
+  const [currentPage, setCurrentPage] = useState(1); //현재 페이지수
+  const [postsPerPage] = useState(10); //한 페이지당 게시물 수
   const [selected, setSelected] = useState("");
   const [modalOn, setModalOn] = useState(false);
 
   // 고유 값으로 사용 될 id
   // ref 를 사용하여 변수 담기
-  const nextId = useRef(2);
+  const nextId = useRef(12);
 
   //페이지 이동
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = board.slice(indexOfFirstPost, indexOfLastPost);
-  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  function currentPosts(data) {
+    let currentPosts = 0;
+    currentPosts = data.slice(indexOfFirst, indexOfLast);
+    return currentPosts;
+  }
 
   //더미 데이터 호출
   // useEffect(() => {
@@ -74,7 +72,11 @@ export default function CommunityBoard() {
   };
 
   const handleRemove = (id) => {
-    setBoard((info) => info.filter((item) => item.id !== id));
+    if (window.confirm("글을 삭제하시겠습니까?")) {
+      setBoard((info) => info.filter((item) => item.id !== id));
+      alert("삭제 완료");
+    } else {
+    }
   };
 
   const handleEdit = (item) => {
@@ -94,7 +96,7 @@ export default function CommunityBoard() {
     setModalOn(false);
   };
 
-  function closeModal() {
+  function handleCancel() {
     setModalOn(false);
   }
 
@@ -115,29 +117,13 @@ export default function CommunityBoard() {
               <th>삭제</th>
             </tr>
           </thead>
-          <tbody>
-            {board.map((item) => {
-              return (
-                <tr>
-                  <td>{item.id}</td>
-                  <td>{item.title}</td>
-                  <td>{item.username}</td>
-                  <td>{item.lastedit}</td>
-                  <td>
-                    <FaPen onClick={() => handleEdit(item.id)} />
-                  </td>
-                  <td>
-                    <FaTrashAlt onClick={() => handleRemove(item.id)} />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
+          <Tr board={board} handleRemove={handleRemove} handleEdit={handleEdit} />
         </table>
+        <Pagination postsPerPage={postsPerPage} totalPosts={board.length} paginate={setCurrentPage}></Pagination>
         <Post onSaveData={handleSave} />
         {modalOn && (
-          <Modal visible={modalOn} closable={true} maskClosable={true} onClose={closeModal}>
-            <EditPost selectedData={selected} handleCancel={closeModal} handleEditSubmit={handleEditSubmit} />
+          <Modal visible={modalOn} closable={true} maskClosable={false} onClose={handleCancel}>
+            <EditPostModal selectedData={selected} handleCancel={handleCancel} handleEditSubmit={handleEditSubmit} />
           </Modal>
         )}
       </div>
@@ -168,7 +154,7 @@ const Section = styled.section`
     line-height: 1.5;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    margin: 20px 10px;
+    margin: 20px 10px 20px 10px;
     th {
       width: 150px;
       padding: 10px;

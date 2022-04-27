@@ -11,7 +11,7 @@ export default function SettingPage() {
     <Section>
       <div className="user">
         <div className="userTitleContainer">
-          <h1 className="userTitle">내 정보</h1>
+          <h1>내 정보</h1>
           <button className="userInfoEditButton">수정</button>
         </div>
         <div className="userContainer">
@@ -49,27 +49,15 @@ export default function SettingPage() {
             <form className="userUpdateForm">
               <div className="userUpdateItem">
                 <label>Username</label>
-                <input
-                  type="text"
-                  placeholder="hani99"
-                  className="userUpdateInput"
-                />
+                <input type="text" placeholder="hani99" className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="hani99@naver.com"
-                  className="userUpdateInput"
-                />
+                <input type="text" placeholder="hani99@naver.com" className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Phone</label>
-                <input
-                  type="text"
-                  placeholder="010-2223-1242"
-                  className="userUpdateInput"
-                />
+                <input type="text" placeholder="010-2223-1242" className="userUpdateInput" />
               </div>
             </form>
           </div>
@@ -87,12 +75,19 @@ const Section = styled.section`
   .user {
     flex: 4;
     padding: 0 30px;
+    margin: 8vw 8vw;
   }
 
   .userTitleContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    h1 {
+      color: #3c76e0;
+      font-family: "Gowun Batang", serif;
+      letter-spacing: 0.3rem;
+    }
   }
 
   .userInfoEditButton {
@@ -114,8 +109,8 @@ const Section = styled.section`
   .userShow {
     flex: 1;
     padding: 50px;
-    margin-left: 10px;
     background-color: white;
+    border-radius: 0.4rem;
 
     -webkit-box-shadow: 2px 4px 15px -2px rgba(0, 0, 0, 0.57);
     box-shadow: 2px 4px 15px -2px rgba(0, 0, 0, 0.57);
@@ -125,6 +120,7 @@ const Section = styled.section`
     flex: 2;
     padding: 50px;
     background-color: white;
+    border-radius: 0.4rem;
 
     -webkit-box-shadow: 2px 4px 15px -2px rgba(0, 0, 0, 0.57);
     box-shadow: 2px 4px 15px -2px rgba(0, 0, 0, 0.57);
@@ -230,6 +226,7 @@ const Section = styled.section`
     }
 
     .userUpdate {
+      margin-left: 0px;
     }
 
     .userUpdateInput {
