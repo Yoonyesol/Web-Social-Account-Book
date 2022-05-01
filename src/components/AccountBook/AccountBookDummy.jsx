@@ -1,0 +1,38 @@
+export const AccountData = [
+  {
+    id: 1,
+    date: "01.30",
+    category: "교통/차량",
+    content: "버스비",
+    account: "-4,000",
+    inex: "지출",
+    memo: "버스비",
+  },
+  {
+    id: 2,
+    date: "01.31",
+    category: "식비",
+    content: "외식비",
+    account: "12,000",
+    inex: "지출",
+    memo: "외식",
+  },
+  {
+    id: 3,
+    date: "02.06",
+    category: "문화비",
+    content: "서적구매",
+    account: "25,000",
+    inex: "지출",
+    memo: "컴퓨터공학입문서 구입",
+  },
+  {
+    id: 4,
+    date: "02.18",
+    category: "식비",
+    content: "외식비",
+    account: "52,000",
+    inex: "지출",
+    memo: "외식",
+  },
+];

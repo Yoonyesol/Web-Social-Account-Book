@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Post from "./Post";
@@ -7,8 +7,6 @@ import { boardData } from "./BoardDummy";
 import Pagination from "./Pagination";
 import Tr from "./Tr";
 
-import { FaPen } from "react-icons/fa";
-import { FaTrashAlt } from "react-icons/fa";
 import EditPostModal from "./EditPostModal";
 
 export default function CommunityBoard() {

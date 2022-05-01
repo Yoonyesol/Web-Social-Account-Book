@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import ChattingMain from "../components/Challenge/ChattingMain";
 
 export default function ChallengePage() {
-  return <Section>챌린지 페이지</Section>;
+  return (
+    <Section>
+      <ChattingMain />
+    </Section>
+  );
 }
 
 const Section = styled.section`

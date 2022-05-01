@@ -6,7 +6,7 @@ import LoginPage from "../pages/LoginPage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FriendListPage from "../pages/FriendListPage";
-import IncomeExpensePage from "../pages/IncomeExpensePage";
+import AccountBookPage from "../pages/AccoutBookPage";
 import CalendarPage from "../pages/CalendarPage";
 import ChallengePage from "../pages/ChallengePage";
 import CommunityPage from "../pages/CommuityPage";
@@ -19,7 +19,7 @@ export const AppRouter = () => {
         <Sidebar />
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
-          <Route path="/inex" element={<IncomeExpensePage />} />
+          <Route path="/inex" element={<AccountBookPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/friendlist" element={<FriendListPage />} />
           {/* <Route path="/post/:postId" element={<PostPage />} /> */}
