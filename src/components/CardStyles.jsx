@@ -17,6 +17,6 @@ export const cardStyleWhite = css`
 export const cardStylePink = css`
   padding: 1rem 2rem 3rem 2rem;
   border-radius: 1rem;
-  background-color: #b8ebd5;
+  background-color: #facfdb;
   color: black;
 `;

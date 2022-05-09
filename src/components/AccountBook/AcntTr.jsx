@@ -1,7 +1,7 @@
 import React from "react";
 import AcntTd from "./AcntTd";
 
-const AcntTdata = ({ acntData, handleRemove, handleEdit }) => {
+const AcntTr = ({ acntData, handleRemove, handleEdit }) => {
   return (
     <tbody>
       {acntData.map((item) => {
@@ -10,4 +10,4 @@ const AcntTdata = ({ acntData, handleRemove, handleEdit }) => {
     </tbody>
   );
 };
-export default AcntTdata;
+export default AcntTr;

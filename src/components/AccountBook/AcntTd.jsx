@@ -13,7 +13,7 @@ const AcntTd = ({ item, handleRemove, handleEdit }) => {
   };
 
   return (
-    <tr id={item.id}>
+    <tr>
       <td>{item.date}</td>
       <td>{item.inex}</td>
       <td>{item.category}</td>

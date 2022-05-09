@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const EditPostModal = ({ selectedData, handleEditCancel, handleEditSubmit }) => {
+const AccountBookEditPost = ({ selectedData, handleEditCancel, handleEditSubmit }) => {
   const [edited, setEdited] = useState(selectedData);
 
   const onCancel = () => {
@@ -71,7 +71,7 @@ const EditPostModal = ({ selectedData, handleEditCancel, handleEditSubmit }) => 
   );
 };
 
-export default EditPostModal;
+export default AccountBookEditPost;
 
 const Section = styled.section`
   .formItem {

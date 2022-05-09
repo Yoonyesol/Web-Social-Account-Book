@@ -1,26 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { cardStylePink } from "../CardStyles";
 
 export default function AccountBookAnalytics() {
+  const [result, setResult] = useState(300000);
+  const [income, setIncome] = useState(190000);
+  const [expense, setExpense] = useState(30000);
+
   return (
     <Section>
       <div className="analytic">
         <div className="content">
           <h5>예산</h5>
-          <h2>300,000원</h2>
+          <h2>{result}원</h2>
         </div>
       </div>
       <div className="analytic">
         <div className="content">
           <h5>수입</h5>
-          <h2>190,000</h2>
+          <h2>{income}원</h2>
         </div>
       </div>
       <div className="analytic">
         <div className="content">
           <h5>지출</h5>
-          <h2>30,000원</h2>
+          <h2>{expense}원</h2>
         </div>
       </div>
     </Section>

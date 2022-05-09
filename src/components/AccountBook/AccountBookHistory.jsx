@@ -8,8 +8,7 @@ import AccountBookEditPost from "./AccountBookEditPost";
 import { AccountData } from "./AccountBookDummy";
 import AcntTr from "./AcntTr";
 
-import { FaPen } from "react-icons/fa";
-import { FaTrashAlt } from "react-icons/fa";
+import { FiPlusCircle } from "react-icons/fi";
 
 export default function AccountBookHistory() {
   const [acntData, setAcntData] = useState(AccountData);
@@ -21,7 +20,7 @@ export default function AccountBookHistory() {
   const handleSave = (data) => {
     if (data.id) {
       setAcntData(
-        data.map((row) =>
+        acntData.map((row) =>
           data.id === row.id
             ? {
                 id: data.id,
@@ -94,7 +93,7 @@ export default function AccountBookHistory() {
     <Section>
       <div className="title">
         <h2>입출금 내역</h2>
-        <FaPen onClick={openModal} />
+        <FiPlusCircle onClick={openModal} />
         {modalOn && (
           <Modal visible={modalOn} closable={true} maskClosable={true} onClose={handleCancel}>
             <AccountBookPost onSaveData={handleSave} handleCancel={handleCancel} />
@@ -125,6 +124,7 @@ const Section = styled.section`
     display: flex;
     justify-content: space-between;
     svg {
+      font-size: 1.8rem;
       cursor: pointer;
     }
     h2 {
