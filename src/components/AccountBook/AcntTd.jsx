@@ -18,7 +18,7 @@ const AcntTd = ({ item, handleRemove, handleEdit }) => {
       <td>{item.inex}</td>
       <td>{item.category}</td>
       <td>{item.content}</td>
-      <td>{item.account}</td>
+      <td>{item.account.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
       <td>
         <FaPen onClick={onEdit} />
       </td>

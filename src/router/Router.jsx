@@ -1,8 +1,9 @@
 import React from "react";
 import Dashboard from "../components/Dashboard";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/common/Sidebar";
 import SignUpPage from "../pages/SignUpPage";
 import LoginPage from "../pages/LoginPage";
+import WritePage from "../pages/WritePage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FriendListPage from "../pages/FriendListPage";

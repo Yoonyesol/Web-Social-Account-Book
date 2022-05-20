@@ -1,16 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { cardStyle } from "./CardStyles";
+import { cardStyle } from "./common/CardStyles";
 
 export default function Profile() {
   return (
     <Section>
       <div className="image">
-        <img
-          src="https://cdn.pixabay.com/photo/2022/03/30/19/19/mountain-7101737_960_720.jpg"
-          alt="profile"
-        />
+        <img src="https://cdn.pixabay.com/photo/2022/03/30/19/19/mountain-7101737_960_720.jpg" alt="profile" />
       </div>
       <div className="title">
         <h2>김인하</h2>

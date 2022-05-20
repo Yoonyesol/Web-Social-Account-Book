@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { cardStyle } from "../CardStyles";
+import { cardStyle } from "../common/CardStyles";
 
-import Modal from "../Modal";
+import Modal from "../common/Modal";
 import AccountBookPost from "./AccountBookPost";
 import AccountBookEditPost from "./AccountBookEditPost";
 import { AccountData } from "./AccountBookDummy";
@@ -28,7 +28,7 @@ export default function AccountBookHistory() {
                 date: data.date,
                 category: data.category,
                 content: data.content,
-                account: data.account,
+                account: data.inex === "수입" ? data.account : data.account * -1,
                 memo: data.memo,
               }
             : row,
@@ -42,16 +42,17 @@ export default function AccountBookHistory() {
           date: data.date,
           category: data.category,
           content: data.content,
-          account: data.account,
+          account: data.inex === "수입" ? data.account : data.account * -1,
           memo: data.memo,
         }),
       );
       nextId.current += 1;
     }
+    handleCancel();
   };
 
   const handleRemove = (id) => {
-    if (window.confirm("글을 삭제하시겠습니까?")) {
+    if (window.confirm("내역을 삭제하시겠습니까?")) {
       setAcntData((data) => data.filter((item) => item.id !== id));
       alert("삭제 완료");
     } else {

@@ -3,27 +3,24 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { HiArrowNarrowRight } from "react-icons/hi";
-import { cardStyle } from "./CardStyles";
+import { cardStyle } from "./common/CardStyles";
 
 export default function Friends() {
   const friend_list = [
     {
-      image:
-        "https://cdn.pixabay.com/photo/2022/03/22/18/24/flowers-7085710_960_720.jpg",
+      image: "https://cdn.pixabay.com/photo/2022/03/22/18/24/flowers-7085710_960_720.jpg",
       name: "정인하",
       time: "305,353,330원",
       amount: "+$50",
     },
     {
-      image:
-        "https://cdn.pixabay.com/photo/2021/07/15/05/06/flowers-6467492_960_720.jpg",
+      image: "https://cdn.pixabay.com/photo/2021/07/15/05/06/flowers-6467492_960_720.jpg",
       name: "박인하",
       time: "270,040원",
       amount: "-$25",
     },
     {
-      image:
-        "https://cdn.pixabay.com/photo/2022/03/26/10/45/frankfurt-7092736_960_720.jpg",
+      image: "https://cdn.pixabay.com/photo/2022/03/26/10/45/frankfurt-7092736_960_720.jpg",
       name: "이인하",
       time: "304,700원",
       amount: "+$150",

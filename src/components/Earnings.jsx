@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { AreaChart, Area, Tooltip, ResponsiveContainer, XAxis } from "recharts";
-import { cardStyle } from "./CardStyles";
+import { cardStyle } from "./common/CardStyles";
 
 const userData = [
   {
@@ -59,12 +59,7 @@ export default function Earnings() {
       </div>
       <div className="chart">
         <ResponsiveContainer height="100%" width="100%">
-          <AreaChart
-            width={500}
-            height={400}
-            data={userData}
-            margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
-          >
+          <AreaChart width={500} height={400} data={userData} margin={{ top: 0, left: 0, right: 0, bottom: 0 }}>
             <Tooltip />
             <XAxis dataKey="name" />
             <Area

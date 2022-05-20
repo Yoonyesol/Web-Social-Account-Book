@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import DatePicker from "react-datepicker"; // DatePicker 라는 컴포넌트도 가져오깅
+import "react-datepicker/dist/react-datepicker.css"; // 스타일 맥이기
+// import { format } from "date-fns";
 
 const AccountBookPost = ({ onSaveData, handleCancel }) => {
+  // const [date, setDate] = useState(new Date());
+  // //string으로 변환
+  // const strDate = String(format(date, "yy.MM.dd"));
+  // console.log(strDate);
+
   const [form, setForm] = useState({
-    ocr_img: "",
+    ocr_img: null,
     inex: "",
     category: "",
     content: "",
@@ -25,7 +33,7 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
     onSaveData(form);
     console.log(form);
     setForm({
-      ocr_img: "",
+      ocr_img: null,
       inex: "",
       category: "",
       content: "",
@@ -33,6 +41,7 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
       date: "",
       memo: "",
     });
+    alert("저장되었습니다!");
   };
 
   const handleOCRChange = (e) => {
@@ -61,10 +70,6 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
     handleCancel();
   };
 
-  const SaveAction = () => {
-    alert("입력되었습니다!");
-  };
-
   return (
     <Section>
       <div className="container">
@@ -82,16 +87,14 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
             />
           </div>
           <div class="formItem">
-            <label htmlFor="inex">지출/수입</label>
-            <input
-              className="formInput"
-              required
-              placeholder="유형을 선택해주세요"
-              type="text"
-              name="inex"
-              value={form.inex}
-              onChange={handleChange}
-            />
+            <label htmlFor="inex">
+              <input className="formInput" type="radio" name="inex" value="지출" onChange={handleChange} required />
+              지출
+            </label>
+            <label htmlFor="inex">
+              <input className="formInput" type="radio" name="inex" value="수입" onChange={handleChange} />
+              수입
+            </label>
           </div>
           <div class="formItem">
             <label htmlFor="category">카테고리</label>
@@ -123,7 +126,8 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
               className="formInput"
               required
               placeholder="금액을 입력해주세요"
-              type="text"
+              type="number"
+              min="1"
               name="account"
               value={form.account}
               onChange={handleChange}
@@ -131,12 +135,19 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
           </div>
           <div class="formItem">
             <label htmlFor="date">날짜</label>
+            {/* <MyDatePicker
+              name="date"
+              selected={date}
+              dateFormat="yy.MM.dd" // 날짜 형식
+              onChange={(date) => setDate(date)}
+            /> */}
             <input
               className="formInput"
               required
-              placeholder="날짜를 입력해주세요"
-              type="text"
+              placeholder="금액을 입력해주세요"
+              type="date"
               name="date"
+              pattern="\d{4}-\d{2}-\d{2}"
               value={form.date}
               onChange={handleChange}
             />
@@ -145,7 +156,6 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
             <label htmlFor="memo">메모</label>
             <input
               className="formInput"
-              required
               placeholder="메모를 입력해주세요"
               type="text"
               name="memo"
@@ -154,7 +164,7 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
             />
           </div>
           <div className="BtnContainer">
-            <button className="SaveBtn" type="submit" onClick={SaveAction}>
+            <button className="SaveBtn" type="submit">
               저장
             </button>
             <button className="CancelBtn" onClick={onCancel}>
@@ -168,6 +178,13 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
 };
 
 export default AccountBookPost;
+
+// const MyDatePicker = styled(DatePicker)`
+//   width: 100%;
+//   font-size: 15px;
+//   font-weight: 500;
+//   font-family: "Gowun Batang", serif;
+// `;
 
 const Section = styled.section`
   .formItem {
@@ -183,16 +200,22 @@ const Section = styled.section`
     font-family: "Gowun Batang", serif;
   }
 
-  .formItem > input[type="text"] {
+  .formItem > input {
     font-size: 15px;
     font-weight: 500;
     font-family: "Gowun Batang", serif;
   }
 
-  .formInput {
-    width: 100%;
-    height: 30px;
-    border-radius: 0.25rem;
+  .formItem > select {
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Gowun Batang", serif;
+  }
+
+  .formItem > select option {
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Gowun Batang", serif;
   }
 
   .BtnContainer {

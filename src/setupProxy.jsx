@@ -6,7 +6,7 @@ module.exports = (app) => {
     //"/hello로 요청이 들어오면 proxy 미들웨어 실행"
     "/hello",
     createProxyMiddleware({
-      target: "http://localhost:8080",
+      target: "http://localhost:8080", //localhost 주소
       changeOrigin: true,
     }),
   );

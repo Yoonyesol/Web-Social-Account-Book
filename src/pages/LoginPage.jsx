@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { cardStyle } from "../components/CardStyles";
+import { cardStyle } from "../components/common/CardStyles";
 import NaverLogin from "react-naver-login";
 
 export default function LoginPage() {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
   const _clickSnsLoginNaver = (e) => {
     let naverid = e.id; // 네이버에서 제공한 ID
   };
@@ -16,7 +21,7 @@ export default function LoginPage() {
         </div>
         <NaverLogin
           clientId={"iL_HNtxzFEwriVAcSsFc"}
-          callbackUrl="http://localhost:3000"
+          callbackUrl="http://localhost:8080"
           render={(renderProps) => (
             <div onClick={renderProps.onClick} disabled={renderProps.disabled}>
               <img className="login_btn" src="img/NaverIcon/btnG_complete.png" />

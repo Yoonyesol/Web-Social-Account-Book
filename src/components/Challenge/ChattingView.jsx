@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { chatBubble } from "./ChatBubble";
+import ChatCard from "./ChatCard";
+import SendForm from "./SendForm";
 
 export default function ChattingView() {
-  const html = document.querySelector("html");
   return (
     <>
       <Section>
@@ -12,8 +12,10 @@ export default function ChattingView() {
           <h5 id="personnel">5</h5>
         </div>
         <div className="contentContainer">
-          <div className="sendMsg">말풍선</div>
-          <input placeholder="메시지를 입력하세요" />
+          <ChatCard />
+        </div>
+        <div className="sendContainer">
+          <SendForm />
         </div>
       </Section>
     </>
@@ -27,17 +29,14 @@ const Section = styled.section`
   width: 18vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   border-radius: 0.4rem;
   gap: 2rem;
-  ${chatBubble}
 
   .top {
     width: 100%;
     border-radius: 0.4rem 0.4rem 0rem 0rem;
     padding: 1rem 2rem;
-    background-color: #d9b6ee;
+    background-color: #6895e9;
     text-align: center;
     h3 {
       margin-bottom: 0.5rem;
@@ -45,12 +44,47 @@ const Section = styled.section`
   }
 
   .contentContainer {
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    ::-webkit-scrollbar {
+      background-color: #8b8fc8;
+      width: 0.4vw;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #efecf5;
+    }
+  }
+
+  .sendContainer {
+    padding: 1rem;
+    width: 100%;
+    flex-direction: row;
+    input {
+      flex: 4;
+      border-radius: 0.4rem;
+      height: 2.5rem;
+      width: 90%;
+    }
+    button {
+      width: 10%;
+      height: 40px;
+      border-radius: 4px;
+      background-color: #4f85e9;
+      color: #ffffff;
+      outline: none;
+      border: none;
+      &:hover {
+        background-color: #3070e6;
+      }
+    }
   }
 
   @media screen and (min-width: 280px) and (max-width: 1080px) {
     position: initial;
     width: 100%;
     height: max-content;
-    padding: 1rem;
   }
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import { cardStyle } from "./CardStyles";
+import { cardStyle } from "./common/CardStyles";
 
 export default function CategoryExpense() {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AF19FF"];
@@ -64,10 +64,7 @@ export default function CategoryExpense() {
             fill="#8884d8"
           >
             {pieData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
           <Tooltip content={<CustomTooltip />} />

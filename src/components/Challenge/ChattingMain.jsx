@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import ChattingSidebar from "./ChattingSidebar";
+import ChattingList from "./ChattingList";
 import ChattingView from "./ChattingView";
 export default function ChattingMain() {
   return (
     <Section>
-      <ChattingSidebar />
+      <ChattingList />
       <ChattingView />
     </Section>
   );

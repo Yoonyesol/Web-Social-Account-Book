@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Analytics from "./Analytics";
+import Analytics from "./common/Analytics";
 import Earnings from "./Earnings";
-import Navbar from "./Navbar";
+import Navbar from "./common/Navbar";
 import Profile from "./Profile";
 import CategoryExpense from "./CategoryExpense";
 import Friends from "./Friends";
@@ -24,7 +24,7 @@ export default function Dashboard() {
       {
         opacity: 0,
         interval: 100,
-      }
+      },
     );
   });
   return (

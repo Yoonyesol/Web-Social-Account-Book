@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { cardStylePink } from "../CardStyles";
+import { cardStylePink } from "../common/CardStyles";
 
 export default function AccountBookAnalytics() {
   const [result, setResult] = useState(300000);
@@ -12,19 +12,19 @@ export default function AccountBookAnalytics() {
       <div className="analytic">
         <div className="content">
           <h5>예산</h5>
-          <h2>{result}원</h2>
+          <h2>{result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h2>
         </div>
       </div>
       <div className="analytic">
         <div className="content">
           <h5>수입</h5>
-          <h2>{income}원</h2>
+          <h2>{income.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h2>
         </div>
       </div>
       <div className="analytic">
         <div className="content">
           <h5>지출</h5>
-          <h2>{expense}원</h2>
+          <h2>{expense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h2>
         </div>
       </div>
     </Section>

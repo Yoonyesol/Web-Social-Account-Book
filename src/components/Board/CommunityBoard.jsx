@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import Post from "./Post";
-import Modal from "../Modal";
+import Modal from "../common/Modal";
 import { boardData } from "./BoardDummy";
 import Pagination from "./Pagination";
 import Tr from "./Tr";

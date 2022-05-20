@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { cardStyleWhite } from "../../components/CardStyles";
+import { cardStyleWhite } from "../../components/common/CardStyles";
 
 const Post = ({ onSaveData }) => {
   const [form, setForm] = useState({
     title: "",
     username: "",
     content: "",
-    editdate: "",
+    editdate: new Date(),
   });
 
   const handleChange = (e) => {
@@ -28,6 +28,7 @@ const Post = ({ onSaveData }) => {
       content: "",
       editdate: "",
     });
+    alert("저장되었습니다!");
   };
 
   return (
@@ -72,7 +73,7 @@ const Post = ({ onSaveData }) => {
             />
           </div>
           <div className="btnContainer">
-            <button className="newPostBtn" type="submit" onClick={() => alert("등록되었습니다!")}>
+            <button className="newPostBtn" type="submit">
               작성
             </button>
           </div>
