@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ChatCard from "./ChatCard";
 import SendForm from "./SendForm";
+import Setgoal from "./SetGoal";
 
 export default function ChattingView() {
   return (
@@ -11,6 +12,7 @@ export default function ChattingView() {
           <h3 id="chattingname">인하대 컴퓨터공학</h3>
           <h5 id="personnel">5</h5>
         </div>
+        <Setgoal />
         <div className="contentContainer">
           <ChatCard />
         </div>
@@ -49,12 +51,12 @@ const Section = styled.section`
     overflow-y: auto;
 
     ::-webkit-scrollbar {
-      background-color: #8b8fc8;
-      width: 0.4vw;
+      background-color: #efecf5;
+      width: 0.6vw;
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #efecf5;
+      background: #8b8fc8;
     }
   }
 

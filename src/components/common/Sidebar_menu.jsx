@@ -13,7 +13,7 @@ export default function SidebarMenu() {
   return (
     <ul>
       <li onClick={() => setCurrentLink(1)} className={currentLink === 1 ? "active" : "none"}>
-        <Link to="/">
+        <Link to="/main">
           <MdSpaceDashboard />
           <span> 대시보드</span>
         </Link>

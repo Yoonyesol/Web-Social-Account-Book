@@ -14,9 +14,9 @@ export const cardStyleWhite = css`
   color: black;
 `;
 
-export const cardStylePink = css`
+export const cardStylePurple = css`
   padding: 1rem 2rem 3rem 2rem;
   border-radius: 1rem;
-  background-color: #facfdb;
+  background-color: #8b8fc8;
   color: black;
 `;

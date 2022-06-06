@@ -10,20 +10,20 @@ export default function Friends() {
     {
       image: "https://cdn.pixabay.com/photo/2022/03/22/18/24/flowers-7085710_960_720.jpg",
       name: "정인하",
-      time: "305,353,330원",
-      amount: "+$50",
+      budget: "305,353,330원",
+      amount: "33,550원",
     },
     {
       image: "https://cdn.pixabay.com/photo/2021/07/15/05/06/flowers-6467492_960_720.jpg",
       name: "박인하",
-      time: "270,040원",
-      amount: "-$25",
+      budget: "270,040원",
+      amount: "-40,800원",
     },
     {
       image: "https://cdn.pixabay.com/photo/2022/03/26/10/45/frankfurt-7092736_960_720.jpg",
       name: "이인하",
-      time: "304,700원",
-      amount: "+$150",
+      budget: "304,700원",
+      amount: "150원",
     },
   ];
   return (
@@ -41,7 +41,7 @@ export default function Friends() {
                 </div>
                 <div className="friends__title__details">
                   <h3>{friends.name}</h3>
-                  <h5>{friends.time}</h5>
+                  <h5>{friends.budget}</h5>
                 </div>
               </div>
               <div className="friends__amount">
@@ -118,7 +118,7 @@ const Section = styled.section`
     justify-content: flex-end;
     align-items: center;
     text-decoration: none;
-    color: #7e4e92;
+    color: #3c76e0;
     font-family: "Gowun Batang", serif;
     font-weight: bold;
     margin-top: 1rem;

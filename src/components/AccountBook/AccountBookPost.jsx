@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import DatePicker from "react-datepicker"; // DatePicker 라는 컴포넌트도 가져오깅
-import "react-datepicker/dist/react-datepicker.css"; // 스타일 맥이기
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // import { format } from "date-fns";
 
 const AccountBookPost = ({ onSaveData, handleCancel }) => {
@@ -12,10 +12,10 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
 
   const [form, setForm] = useState({
     ocr_img: null,
-    inex: "",
+    inex: null,
     category: "",
     content: "",
-    account: "",
+    account: null,
     date: "",
     memo: "",
   });
@@ -34,10 +34,10 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
     console.log(form);
     setForm({
       ocr_img: null,
-      inex: "",
+      inex: null,
       category: "",
       content: "",
-      account: "",
+      account: null,
       date: "",
       memo: "",
     });

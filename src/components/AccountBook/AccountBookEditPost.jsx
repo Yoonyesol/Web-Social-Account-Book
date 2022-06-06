@@ -19,6 +19,7 @@ const AccountBookEditPost = ({ selectedData, handleEditCancel, handleEditSubmit 
     e.preventDefault();
     console.log(edited);
     handleEditSubmit(edited);
+    alert("수정되었습니다!");
   };
 
   return (
@@ -38,6 +39,34 @@ const AccountBookEditPost = ({ selectedData, handleEditCancel, handleEditSubmit 
             />
           </div>
           <div class="formItem">
+            <label htmlFor="inex">
+              <input
+                className="formInput"
+                type="radio"
+                name="inex"
+                value="지출"
+                onChange={onEditChange}
+                checked={"지출" === edited.inex}
+              />
+              지출
+            </label>
+            <label htmlFor="inex">
+              <input
+                className="formInput"
+                type="radio"
+                name="inex"
+                value="수입"
+                onChange={onEditChange}
+                checked={"수입" === edited.inex}
+              />
+              수입
+            </label>
+          </div>
+          <div class="formItem">
+            <label htmlFor="inex">수입/지출</label>
+            <input className="formInput" type="text" name="inex" value={edited.inex} onChange={onEditChange} />
+          </div>
+          <div class="formItem">
             <label htmlFor="category">카테고리</label>
             <input className="formInput" type="text" name="category" value={edited.category} onChange={onEditChange} />
           </div>
@@ -47,18 +76,25 @@ const AccountBookEditPost = ({ selectedData, handleEditCancel, handleEditSubmit 
           </div>
           <div class="formItem">
             <label htmlFor="account">금액</label>
-            <input className="formInput" type="text" name="account" value={edited.account} onChange={onEditChange} />
+            <input
+              className="formInput"
+              type="number"
+              name="account"
+              min="1"
+              value={edited.account}
+              onChange={onEditChange}
+            />
           </div>
           <div class="formItem">
             <label htmlFor="date">날짜</label>
-            <input className="formInput" type="text" name="date" value={edited.date} onChange={onEditChange} />
+            <input className="formInput" type="date" name="date" value={edited.date} onChange={onEditChange} />
           </div>
           <div class="formItem">
             <label htmlFor="memo">메모</label>
             <input className="formInput" type="text" name="memo" value={edited.memo} onChange={onEditChange} />
           </div>
           <div className="BtnContainer">
-            <button type="submit" className="EditBtn" onClick={() => alert("수정되었습니다!")}>
+            <button type="submit" className="EditBtn">
               수정
             </button>
             <button className="CancelBtn" onClick={onCancel}>
@@ -87,17 +123,11 @@ const Section = styled.section`
     font-family: "Gowun Batang", serif;
   }
 
-  .formItem > input[type="text"],
+  .formItem > input,
   .formItem > textarea[type="text"] {
     font-size: 17px;
     font-weight: 500;
     font-family: "Gowun Batang", serif;
-  }
-
-  .formInput {
-    width: 100%;
-    height: 30px;
-    border-radius: 0.25rem;
   }
 
   /* .formArea {

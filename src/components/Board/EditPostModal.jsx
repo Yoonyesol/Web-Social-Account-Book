@@ -27,12 +27,12 @@ const EditPostModal = ({ selectedData, handleCancel, handleEditSubmit }) => {
         <h3>글 수정</h3>
         <form action="/api/v1/posts" className="form" onSubmit={onSubmitEdit}>
           <div class="formItem">
-            <label htmlFor="username">작성자</label>
+            <label htmlFor="author">작성자</label>
             <input
               className="formInput"
               type="text"
-              name="username"
-              value={edited.username}
+              name="author"
+              value={edited.author}
               onChange={onEditChange}
               disabled
             />

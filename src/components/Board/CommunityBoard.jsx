@@ -1,15 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Post from "./Post";
 import Modal from "../common/Modal";
 import { boardData } from "./BoardDummy";
 import Pagination from "./Pagination";
 import Tr from "./Tr";
+import API from "../util/api";
+import { readAllPosts, savePosts } from "../util/APIUtils";
 
 import EditPostModal from "./EditPostModal";
 
-export default function CommunityBoard() {
-  const [board, setBoard] = useState(boardData);
+export default function CommunityBoard({ user }) {
+  const [message, setMessage] = useState("");
+
+  const [board, setBoard] = useState([{ id: "", author: "", title: "", content: "" }]);
   const [currentPage, setCurrentPage] = useState(1); //현재 페이지수
   const [postsPerPage] = useState(10); //한 페이지당 게시물 수
   const [selected, setSelected] = useState("");
@@ -17,7 +21,7 @@ export default function CommunityBoard() {
 
   // 고유 값으로 사용 될 id
   // ref 를 사용하여 변수 담기
-  const nextId = useRef(12);
+  const nextId = useRef(1);
 
   //페이지 이동
   const indexOfLast = currentPage * postsPerPage;
@@ -27,14 +31,6 @@ export default function CommunityBoard() {
     currentPosts = data.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   }
-
-  //더미 데이터 호출
-  // useEffect(() => {
-  //   axios
-  //     .get("https://jsonplaceholder.typicode.com/users")
-  //     .then((res) => setBoard(res.data))
-  //     .catch((err) => console.log(err));
-  // }, []);
 
   const handleSave = (data) => {
     //데이터 수정
@@ -46,7 +42,7 @@ export default function CommunityBoard() {
             ? {
                 id: data.id,
                 title: data.title,
-                username: data.username,
+                author: data.author,
                 content: data.content,
                 lastedit: "22.04.20",
               }
@@ -55,15 +51,22 @@ export default function CommunityBoard() {
       );
     } else {
       //id 존재하지 않을 시, 데이터 추가
-      setBoard((item) =>
-        item.concat({
-          id: nextId.current,
-          title: data.title,
-          username: data.username,
-          content: data.content,
-          lastedit: "22.04.20",
-        }),
-      );
+      savePosts()
+        .then((response) => {
+          setBoard((item) =>
+            item.concat({
+              id: nextId.current,
+              title: data.title,
+              author: data.author,
+              content: data.content,
+              lastedit: "22.04.20",
+            }),
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
       nextId.current += 1;
     }
   };
@@ -81,7 +84,7 @@ export default function CommunityBoard() {
     const selectedData = {
       id: item.id,
       title: item.title,
-      username: item.username,
+      author: item.author,
       content: item.content,
       lastedit: item.lastedit,
     };
@@ -109,18 +112,23 @@ export default function CommunityBoard() {
               <th>Id.</th>
               <th>제목</th>
               <th>작성자</th>
-              <th>최종 수정일</th>
-              <th>수정</th>
+              <th>최종 수정</th>
+              <th>글 수정</th>
               <th>삭제</th>
             </tr>
           </thead>
           <Tr board={board} handleRemove={handleRemove} handleEdit={handleEdit} />
         </table>
         <Pagination postsPerPage={postsPerPage} totalPosts={board.length} paginate={setCurrentPage}></Pagination>
-        <Post onSaveData={handleSave} />
+        <Post onSaveData={handleSave} userInfo={user} />
         {modalOn && (
           <Modal visible={modalOn} closable={true} maskClosable={false} onClose={handleCancel}>
-            <EditPostModal selectedData={selected} handleCancel={handleCancel} handleEditSubmit={handleEditSubmit} />
+            <EditPostModal
+              selectedData={selected}
+              handleCancel={handleCancel}
+              handleEditSubmit={handleEditSubmit}
+              userInfo={user}
+            />
           </Modal>
         )}
       </div>

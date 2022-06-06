@@ -17,9 +17,5 @@ const Section = styled.section`
 
   @media screen and (min-width: 280px) and (max-width: 1080px) {
     margin-left: 0;
-    position: initial;
-    width: 100%;
-    height: max-content;
-    padding: 1rem;
   }
 `;

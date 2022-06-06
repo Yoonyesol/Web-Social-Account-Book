@@ -16,7 +16,7 @@ const Td = ({ item, handleRemove, handleEdit }) => {
     <tr>
       <td>{item.id}</td>
       <td>{item.title}</td>
-      <td>{item.username}</td>
+      <td>{item.author}</td>
       <td>{item.lastedit}</td>
       <td>
         <FaPen onClick={onEdit} />

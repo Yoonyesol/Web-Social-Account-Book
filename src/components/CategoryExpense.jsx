@@ -108,7 +108,4 @@ const Section = styled.section`
       font-family: "Gowun Batang", serif;
     }
   }
-
-  @media screen and (min-width: 280px) and (max-width: 1080px) {
-  }
 `;

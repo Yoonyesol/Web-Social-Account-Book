@@ -45,7 +45,7 @@ const userData = [
     Expense: 6407000,
   },
 ];
-export default function Earnings() {
+export default function EarningPieChart() {
   return (
     <Section>
       <div className="top">

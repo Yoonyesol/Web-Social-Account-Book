@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { VscNotebook } from "react-icons/vsc";
-import { FiLogIn } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import scrollreveal from "scrollreveal";
 import SidebarMenu from "./Sidebar_menu";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ userInfo, logoutAction }) {
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
+
+  const handleLogout = () => {
+    logoutAction();
+  };
 
   useEffect(() => {
     const sr = scrollreveal({
@@ -30,7 +34,7 @@ export default function Sidebar() {
     .links>ul>li:nth-of-type(5),
     .links>ul>li:nth-of-type(6),
     .links>ul>li:nth-of-type(7),
-    .login
+    .logout
     `,
       {
         opacity: 0,
@@ -43,7 +47,7 @@ export default function Sidebar() {
       <Section>
         <div className="top">
           <div className="brand">
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link to="/main" style={{ textDecoration: "none" }}>
               <VscNotebook />
               <span>소셜 가계부</span>
             </Link>
@@ -64,22 +68,19 @@ export default function Sidebar() {
             <SidebarMenu />
           </div>
         </div>
-        <div className="login">
-          <Link to="/login">
-            <FiLogIn />
-            <span className="login">Login</span>
-          </Link>
+
+        <div className="logout" onClick={handleLogout}>
+          <FiLogOut />
+          <span className="logout">logout</span>
         </div>
       </Section>
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
         <div className="responsive__links">
           <SidebarMenu />
         </div>
-        <div className="login">
-          <Link to="/login">
-            <FiLogIn />
-            <span className="login">Login</span>
-          </Link>
+        <div className="logout" onClick={handleLogout}>
+          <FiLogOut />
+          <span className="logout">logout</span>
         </div>
       </ResponsiveNav>
     </>
@@ -160,7 +161,7 @@ const Section = styled.section`
     }
   }
 
-  .login {
+  .logout {
     padding: 0.3rem 1rem;
     border-radius: 0.6rem;
     &:hover {
@@ -198,7 +199,7 @@ const Section = styled.section`
       }
     }
     .top > .links,
-    .login {
+    .logout {
       display: none;
     }
   }
@@ -251,7 +252,7 @@ const ResponsiveNav = styled.div`
     }
   }
 
-  .login {
+  .logout {
     padding: 0.3rem 1rem;
     border-radius: 0.6rem;
     &:hover {

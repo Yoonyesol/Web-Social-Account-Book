@@ -1,29 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import { BsPhone } from "react-icons/bs";
+import { getCurrentUser } from "../components/util/APIUtils";
+import { API_BASE_URL } from "../components/constants";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdPermIdentity } from "react-icons/md";
+import axios from "axios";
 
-export default function SettingPage() {
+export default function SettingPage({ userInfo }) {
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    getCurrentUser()
+      .then((response) => {
+        setUser({
+          currentUser: response,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
-    // 유저 페이지로 이동, 반응형으로 수정
     <Section>
       <div className="user">
         <div className="userTitleContainer">
           <h1>내 정보</h1>
-          <button className="userInfoEditButton">수정</button>
+          <h2>d{user.currentUser.name}</h2>
+          {/* <button className="userInfoEditButton">수정</button> */}
         </div>
         <div className="userContainer">
           <div className="userShow">
             <div className="userShowTop">
-              <img
-                src="https://cdn.pixabay.com/photo/2022/03/01/09/15/salad-7040875_960_720.jpg"
-                alt=""
-                className="userShowImg"
-              />
+              {userInfo.currentUser.imageUrl ? (
+                <img className="userShowImg" src={userInfo.currentUser.imageUrl} alt={userInfo.currentUser.name} />
+              ) : (
+                <div className="text-avatar">
+                  <span>{userInfo.currentUser.name && userInfo.currentUser.name[0]}</span>
+                </div>
+              )}
+
               <div className="userShowTopTitle">
-                <span className="userShowUsername">김인하</span>
+                <span className="userShowUsername">{userInfo.currentUser.name}</span>
                 <span className="uerShowUserTitle">Have a nice day!</span>
               </div>
             </div>
@@ -31,7 +48,7 @@ export default function SettingPage() {
               <span className="userShowTitle">Account Details</span>
               <div className="userShowInfo">
                 <MdPermIdentity className="userShowIcon" />
-                <span className="userShowInfoTitle">inha99</span>
+                <span className="userShowInfoTitle">id: {userInfo.currentUser.id}</span>
               </div>
               <span className="userShowTitle">Contact Details</span>
               <div className="userShowInfo">
@@ -40,20 +57,20 @@ export default function SettingPage() {
               </div>
               <div className="userShowInfo">
                 <AiOutlineMail className="userShowIcon" />
-                <span className="userShowInfoTitle">inha@naver.com</span>
+                <span className="userShowInfoTitle">{userInfo.currentUser.email}</span>
               </div>
             </div>
           </div>
           <div className="userUpdate">
-            <span className="userUpdateTitle">Edit</span>
+            <span className="userUpdateTitle">Detail</span>
             <form className="userUpdateForm">
               <div className="userUpdateItem">
                 <label>Username</label>
-                <input type="text" placeholder="hani99" className="userUpdateInput" />
+                <input type="text" placeholder={userInfo.currentUser.name} className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Email</label>
-                <input type="text" placeholder="hani99@naver.com" className="userUpdateInput" />
+                <input type="text" placeholder={userInfo.currentUser.email} className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Phone</label>
@@ -128,13 +145,21 @@ const Section = styled.section`
     margin-left: 20px;
   }
 
+  .userShowUsername {
+    font-size: 19px;
+    font-weight: 500;
+    font-family: "Gowun Batang", serif;
+    margin-bottom: 0.5rem;
+  }
+
   .userShowTop {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
   }
 
-  .userShowImg {
+  .userShowImg,
+  .text-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -214,11 +239,10 @@ const Section = styled.section`
     position: initial;
     width: 100%;
     height: max-content;
-    padding: 1rem;
+    padding: 0rem;
 
     .userContainer {
       flex-direction: column;
-      margin: 0.5rem 0.5rem;
     }
 
     .userShow {
@@ -230,7 +254,7 @@ const Section = styled.section`
     }
 
     .userUpdateInput {
-      width: 20vh;
+      width: 15vh;
       height: 30px;
     }
 

@@ -37,7 +37,7 @@ export default function Analytics() {
       </div>
       <div className="analytic">
         <div className="logo">
-        <BiGroup />
+          <BiGroup />
         </div>
         <div className="content">
           <h5>친구</h5>
@@ -58,6 +58,7 @@ const Section = styled.section`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    gap: 1rem;
     transition: 0.5s ease-in-out;
     &:hover {
       background-color: #6c5a74;
@@ -78,6 +79,7 @@ const Section = styled.section`
       }
     }
   }
+
   @media screen and (min-width: 280px) and (max-width: 1080px) {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     /* .analytic {

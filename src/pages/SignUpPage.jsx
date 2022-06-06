@@ -1,173 +1,227 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useLocation, useNavigate } from "react-router-dom";
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } from "../components/constants";
+import { signup } from "../components/util/APIUtils";
+import { Link, Navigate } from "react-router-dom";
+import fbLogo from "../img/fb-logo.png";
+import googleLogo from "../img/google-logo.png";
+import githubLogo from "../img/github-logo.png";
+import Alert from "react-s-alert";
 
-export default function LoginPage() {
+export default function LoginPage({ userInfo }) {
+  let location = useLocation(); //location 객체를 location 변수에 저~장
+
+  if (userInfo.authenticated) {
+    return (
+      <Navigate
+        to={{
+          pathname: "/main",
+          state: { from: location },
+        }}
+      />
+    );
+  }
+
   return (
     <Section>
-      <div class="wrap">
-        <div class="login">
-          <h2>Log-in</h2>
-          <div class="login_sns">
-            <li>
-              <a href="">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
+      <div className="signup-container">
+        <div className="signup-content">
+          <h1 className="signup-title">회원가입</h1>
+          <div className="social-signup">
+            <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
+              <img src={googleLogo} alt="Google" /> Sign up with Google
+            </a>
+            <a className="btn btn-block social-btn facebook" href={FACEBOOK_AUTH_URL}>
+              <img src={fbLogo} alt="Facebook" /> Sign up with Facebook
+            </a>
+            <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
+              <img src={githubLogo} alt="Github" /> Sign up with Github
+            </a>
           </div>
-          <div class="login_id">
-            <h4>E-mail</h4>
-            <input type="email" name="" id="" placeholder="Email" />
+          <div className="or-separator">
+            <span className="or-text">OR</span>
           </div>
-          <div class="login_pw">
-            <h4>Password</h4>
-            <input type="password" name="" id="" placeholder="Password" />
-          </div>
-          <div class="login_etc">
-            <div class="checkbox">
-              <input type="checkbox" name="" id="">
-                {" "}
-                Remember Me?
-              </input>
-            </div>
-            <div class="forgot_pw">
-              <a href="">Forgot Password?</a>
-            </div>
-          </div>
-          <div class="submit">
-            <input type="submit" value="submit" />
-          </div>
+          <SignupForm />
+          <span className="login-link">
+            이미 소셜가계부의 회원이신가요? <Link to="/login">로그인</Link>
+          </span>
         </div>
       </div>
     </Section>
   );
 }
 
+function SignupForm() {
+  const initialState = {
+    name: "",
+    email: "",
+    password: "",
+  };
+  const [signInfo, setSignInfo] = useState(initialState);
+  const history = useNavigate();
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setSignInfo({
+      ...signInfo,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const signUpRequest = Object.assign({}, signInfo);
+
+    signup(signUpRequest)
+      .then((response) => {
+        Alert.success("회원가입되었습니다! 로그인해주세요.");
+        history.push("/login");
+      })
+      .catch((error) => {
+        Alert.error((error && error.message) || "회원가입 실패! 다시 시도해주세요.");
+      });
+  };
+
+  return (
+    <Section>
+      <form onSubmit={handleSubmit}>
+        <div className="form-item">
+          <input
+            type="text"
+            name="name"
+            className="form-control"
+            placeholder="Name"
+            value={signInfo.name}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-item">
+          <input
+            type="email"
+            name="email"
+            className="form-control"
+            placeholder="Email"
+            value={signInfo.email}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-item">
+          <input
+            type="password"
+            name="password"
+            className="form-control"
+            placeholder="Password"
+            value={signInfo.password}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-item">
+          <button type="submit" className="singupBtn">
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </Section>
+  );
+}
+
 const Section = styled.section`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Noto Sans KR", sans-serif;
+  margin-left: 5vw;
+  padding: 2rem;
+  height: 100%;
+
+  .signup-container {
+    text-align: center;
   }
 
-  a {
-    text-decoration: none;
-    color: black;
-  }
-
-  li {
-    list-style: none;
-  }
-
-  .wrap {
-    width: 100%;
-    height: 100vh;
+  .social-signup {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .login {
-    width: 30%;
-    height: 600px;
-    background: white;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
   }
 
-  h2 {
-    color: tomato;
-    font-size: 2em;
-  }
-  .login_sns {
-    padding: 20px;
-    display: flex;
-  }
-
-  .login_sns li {
-    padding: 0px 15px;
-  }
-
-  .login_sns a {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 50px;
-    background: white;
-    font-size: 20px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4), -3px -3px 5px rgba(0, 0, 0, 0.1);
+  .signup-content {
+    background: #fff;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    border-radius: 2px;
+    width: 500px;
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: middle;
+    position: relative;
+    padding: 35px;
   }
 
-  .login_id {
-    margin-top: 20px;
-    width: 80%;
+  .social-btn {
+    margin-bottom: 15px;
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid grey;
   }
 
-  .login_id input {
-    width: 100%;
-    height: 50px;
-    border-radius: 30px;
+  .social-btn img {
+    height: 32px;
+    float: left;
     margin-top: 10px;
-    padding: 0px 20px;
-    border: 1px solid lightgray;
-    outline: none;
   }
 
-  .login_pw {
-    margin-top: 20px;
-    width: 80%;
+  .social-btn.google {
+    margin-top: 7px;
   }
 
-  .login_pw input {
-    width: 100%;
-    height: 50px;
-    border-radius: 30px;
-    margin-top: 10px;
-    padding: 0px 20px;
-    border: 1px solid lightgray;
-    outline: none;
+  .social-btn.facebook img {
+    height: 24px;
+    margin-left: 3px;
   }
 
-  .login_etc {
-    padding: 10px;
-    width: 80%;
+  .social-btn.github img {
+    height: 24px;
+    margin-left: 3px;
+  }
+
+  .login-link {
+    color: rgba(0, 0, 0, 0.65);
     font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
   }
 
-  .submit {
-    margin-top: 50px;
-    width: 80%;
+  .signup-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: rgba(0, 0, 0, 0.65);
   }
-  .submit input {
-    width: 100%;
-    height: 50px;
-    border: 0;
-    outline: none;
-    border-radius: 40px;
-    background: linear-gradient(to left, rgb(255, 77, 46), rgb(255, 155, 47));
+
+  .form-item > input {
+    font-size: 15px;
+    font-weight: 500;
+    width: 14rem;
+    font-family: "Gowun Batang", serif;
+    margin: 0.3rem 0rem 0.1rem 0rem;
+  }
+
+  .singupBtn {
+    margin: 1rem 0;
+    background-color: #5d8de6;
+    padding: 0.2rem 1rem;
+    font-size: 1rem;
+    font-family: "Gowun Batang", serif;
     color: white;
-    font-size: 1.2em;
-    letter-spacing: 2px;
+    border-radius: 0.5rem;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 280px) and (max-width: 1080px) {
+    .signup-content {
+      width: 300px;
+    }
   }
 `;

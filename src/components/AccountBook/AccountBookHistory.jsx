@@ -67,7 +67,7 @@ export default function AccountBookHistory() {
       date: item.date,
       category: item.category,
       content: item.content,
-      account: item.account,
+      account: item.inex === "수입" ? item.account : item.account * -1,
       memo: item.memo,
     };
     setSelected(selectedData);
@@ -96,7 +96,7 @@ export default function AccountBookHistory() {
         <h2>입출금 내역</h2>
         <FiPlusCircle onClick={openModal} />
         {modalOn && (
-          <Modal visible={modalOn} closable={true} maskClosable={true} onClose={handleCancel}>
+          <Modal visible={modalOn} closable={true} maskClosable={false} onClose={handleCancel}>
             <AccountBookPost onSaveData={handleSave} handleCancel={handleCancel} />
           </Modal>
         )}

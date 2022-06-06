@@ -2,19 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   return (
     <Nav>
       <div className="title">
-        <h4>hello</h4>
+        <h4>hello {user.currentUser.name}</h4>
         <h1>
           Welcome to <span>CASH DASHBOARD</span>
         </h1>
       </div>
-      <div className="search">
+      {/* <div className="search">
         <BiSearch />
         <input type="text" placeholder="Search" />
-      </div>
+      </div> */}
     </Nav>
   );
 }
@@ -34,7 +34,7 @@ const Nav = styled.nav`
     }
   }
 
-  .search {
+  /* .search {
     background-color: #d3e0f8;
     display: flex;
     align-items: center;
@@ -57,7 +57,7 @@ const Nav = styled.nav`
         outline: none;
       }
     }
-  }
+  } */
   @media screen and (min-width: 280px) and (max-width: 1080px) {
     flex-direction: column;
     .title {

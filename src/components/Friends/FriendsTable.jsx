@@ -1,22 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import FriendSearch from "./FriendSearch";
 import axios from "axios";
 import { BiBlock } from "react-icons/bi";
+import { myFriends } from "./FriendDummy";
 
 export default function FriendsTable() {
-  const [friends, setFriends] = useState([]);
+  //const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState(myFriends);
 
-  const nextId = useRef(11);
+  const nextId = useRef(6);
 
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((res) => setFriends(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+  //json dummy data
+  // useEffect(() => {
+  //   axios
+  //     .get("https://jsonplaceholder.typicode.com/users")
+  //     .then((res) => setFriends(res.data))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const handleRemove = (id) => {
-    setFriends((friends) => friends.filter((item) => item.id !== id));
+    if (window.confirm("친구목록에서 삭제하시겠습니까?")) {
+      setFriends((friends) => friends.filter((item) => item.id !== id));
+      alert("친구목록에서 삭제되었습니다");
+    } else {
+    }
   };
 
   return (
@@ -24,32 +32,27 @@ export default function FriendsTable() {
       <div className="title">
         <h2>친구 목록</h2>
       </div>
+      <FriendSearch />
       <table className="table">
         <thead>
           <tr className="th">
             <th>Id.</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone No.</th>
-            <th>Website</th>
-            <th>Block</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>차단</th>
           </tr>
         </thead>
         <tbody>
           {friends.map((item) => {
             return (
-              <>
-                <tr>
-                  <td>{item.id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.phone}</td>
-                  <td>{item.website}</td>
-                  <td>
-                    <BiBlock onClick={() => handleRemove(item.id)} />
-                  </td>
-                </tr>
-              </>
+              <tr>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>
+                  <BiBlock onClick={() => handleRemove(item.id)} />
+                </td>
+              </tr>
             );
           })}
         </tbody>
@@ -59,6 +62,8 @@ export default function FriendsTable() {
 }
 
 const Section = styled.section`
+  margin: 0 5.5rem;
+
   .title {
     display: flex;
     justify-content: center;
@@ -69,16 +74,22 @@ const Section = styled.section`
       letter-spacing: 0.3rem;
     }
   }
+
+  .board {
+    display: flex;
+    flex-direction: column;
+  }
+
   .table {
     border-collapse: collapse;
     text-align: center;
     line-height: 1.5;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    margin: 20px 10px;
+    margin: 20px 0;
     th {
       width: 150px;
-      padding: 10px;
+      padding: 6px;
       font-weight: bold;
       vertical-align: top;
       border-bottom: 1px solid #ccc;
@@ -94,6 +105,10 @@ const Section = styled.section`
       width: 1.5rem;
       height: 1.5rem;
       color: red;
+      cursor: pointer;
     }
+  }
+  @media screen and (min-width: 280px) and (max-width: 1080px) {
+    margin: 0;
   }
 `;

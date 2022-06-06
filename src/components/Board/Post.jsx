@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { cardStyleWhite } from "../../components/common/CardStyles";
 
-const Post = ({ onSaveData }) => {
+const Post = ({ onSaveData, userInfo }) => {
   const [form, setForm] = useState({
     title: "",
-    username: "",
+    author: "",
     content: "",
     editdate: new Date(),
   });
@@ -20,11 +20,22 @@ const Post = ({ onSaveData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); //페이지 이동 방지
+    fetch("http://localhost:8080/api/v1/posts", {
+      method: "POST",
+      headers: {
+        "Content-type:": "application/json:charset=utf-8",
+      },
+      body: JSON.stringify(form),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
     onSaveData(form);
     console.log(form);
     setForm({
       title: "",
-      username: "",
+      author: "",
       content: "",
       editdate: "",
     });
@@ -49,14 +60,14 @@ const Post = ({ onSaveData }) => {
             />
           </div>
           <div className="formItem">
-            <label htmlFor="username">작성자</label>
+            <label htmlFor="author">작성자</label>
             <input
               className="formInput"
               required
-              placeholder="작성자"
+              placeholder={userInfo.name}
               type="text"
-              name="username"
-              value={form.username}
+              name="author"
+              value={form.author}
               onChange={handleChange}
             />
           </div>

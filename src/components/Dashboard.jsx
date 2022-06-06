@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import Analytics from "./common/Analytics";
-import Earnings from "./Earnings";
+import EarningPieChart from "./EarningPieChart";
 import Navbar from "./common/Navbar";
 import Profile from "./Profile";
 import CategoryExpense from "./CategoryExpense";
 import Friends from "./Friends";
 import scrollreveal from "scrollreveal";
 
-export default function Dashboard() {
+export default function Dashboard({ userInfo }) {
+  //const [message, setMessage] = useState("");
+
   useEffect(() => {
     const sr = scrollreveal({
       origin: "bottom",
@@ -26,19 +29,19 @@ export default function Dashboard() {
         interval: 100,
       },
     );
-  });
+  }, []);
   return (
     <Section>
-      <Navbar />
+      <Navbar user={userInfo} />
       <div className="grid">
         <div className="row__one">
           <Analytics />
           <CategoryExpense />
         </div>
         <div className="row__two">
-          <Earnings />
+          <EarningPieChart />
           <Friends />
-          <Profile />
+          <Profile user={userInfo} />
         </div>
       </div>
     </Section>

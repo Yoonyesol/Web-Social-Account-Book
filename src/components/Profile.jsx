@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { cardStyle } from "./common/CardStyles";
 
-export default function Profile() {
+export default function Profile({ user }) {
   return (
     <Section>
       <div className="image">
         <img src="https://cdn.pixabay.com/photo/2022/03/30/19/19/mountain-7101737_960_720.jpg" alt="profile" />
       </div>
       <div className="title">
-        <h2>김인하</h2>
+        <h2>{user.currentUser.name}</h2>
         <h5>
           <HiOutlineLocationMarker />
           한국, 인천광역시
