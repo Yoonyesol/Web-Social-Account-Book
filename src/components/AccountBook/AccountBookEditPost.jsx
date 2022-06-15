@@ -22,6 +22,10 @@ const AccountBookEditPost = ({ selectedData, handleEditCancel, handleEditSubmit 
     alert("수정되었습니다!");
   };
 
+  const fileHandler = (e) => {
+    alert("업로드");
+  };
+
   return (
     <Section>
       <div className="container">
@@ -35,7 +39,7 @@ const AccountBookEditPost = ({ selectedData, handleEditCancel, handleEditSubmit 
               name="ocr_img"
               placeholder="캡처화면을 업로드해주세요."
               value={edited.ocr_img}
-              onChange={onEditChange}
+              onChange={fileHandler}
             />
           </div>
           <div class="formItem">

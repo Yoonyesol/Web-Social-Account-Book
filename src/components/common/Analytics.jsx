@@ -41,7 +41,7 @@ export default function Analytics() {
         </div>
         <div className="content">
           <h5>친구</h5>
-          <h2>21명</h2>
+          <h2>9명</h2>
         </div>
       </div>
     </Section>

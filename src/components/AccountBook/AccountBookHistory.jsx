@@ -11,6 +11,10 @@ import AcntTr from "./AcntTr";
 import { FiPlusCircle } from "react-icons/fi";
 
 export default function AccountBookHistory() {
+  const [budget, setBudget] = useState(300000);
+  const [income, setIncome] = useState(190000);
+  const [expense, setExpense] = useState(30000);
+
   const [acntData, setAcntData] = useState(AccountData);
   const [selected, setSelected] = useState("");
   const [modalOn, setModalOn] = useState(false);
@@ -55,7 +59,6 @@ export default function AccountBookHistory() {
     if (window.confirm("내역을 삭제하시겠습니까?")) {
       setAcntData((data) => data.filter((item) => item.id !== id));
       alert("삭제 완료");
-    } else {
     }
   };
 
@@ -146,15 +149,6 @@ const Section = styled.section`
     svg {
       cursor: pointer;
     }
-    /* &:nth-of-type(2),
-    &:nth-of-type(4),
-    &:nth-of-type(6),
-    &:nth-of-type(8),
-    &:nth-of-type(10) {
-      border-top: 0.01rem solid #6c6e6e;
-      border-bottom: 0.01rem solid #6c6e6e;
-      padding: 0.8rem 0;
-    } */
   }
   .table {
     display: flex;

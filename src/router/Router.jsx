@@ -62,9 +62,9 @@ function AppRouter() {
           <Route path="/inex" element={<AccountBookPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/friendlist" element={<FriendListPage />} />
-          <Route path="/challenge" element={<ChallengePage />} />
+          <Route path="/challenge" element={<ChallengePage userInfo={loginInfo.currentUser} />} />
           <Route path="/community" element={<CommunityPage userInfo={loginInfo.currentUser} />} />
-          <Route path="/setting" element={<SettingPage userInfo={loginInfo} />} />
+          <Route path="/setting" element={<SettingPage userInfo={loginInfo.currentUser} />} />
           <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />}></Route>
           <Route path="/signup" element={<SignUpPage userInfo={loginInfo} />} />
           <Route path="/login" element={<LoginPage userInfo={loginInfo} />} />

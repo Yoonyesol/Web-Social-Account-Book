@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const EditPostModal = ({ selectedData, handleCancel, handleEditSubmit }) => {
+const EditPostModal = ({ selectedData, handleCancel, handleEditSubmit, userInfo }) => {
   //상위 컴포넌트에서 가져온 데이터 set
   const [edited, setEdited] = useState(selectedData);
 
@@ -18,7 +18,12 @@ const EditPostModal = ({ selectedData, handleCancel, handleEditSubmit }) => {
 
   const onSubmitEdit = (e) => {
     e.preventDefault();
-    handleEditSubmit(edited);
+    if (edited.author === userInfo.name) {
+      alert("수정되었습니다!");
+      handleEditSubmit(edited);
+    } else {
+      alert("수정권한이 없습니다!");
+    }
   };
 
   return (
@@ -57,7 +62,7 @@ const EditPostModal = ({ selectedData, handleCancel, handleEditSubmit }) => {
             />
           </div>
           <div className="BtnContainer">
-            <button type="submit" className="EditBtn" onClick={() => alert("수정되었습니다!")}>
+            <button type="submit" className="EditBtn">
               수정
             </button>
             <button className="CancelBtn" onClick={onCancel}>

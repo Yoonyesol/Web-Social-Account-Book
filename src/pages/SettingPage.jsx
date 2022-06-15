@@ -10,37 +10,37 @@ import axios from "axios";
 export default function SettingPage({ userInfo }) {
   const [user, setUser] = useState([]);
 
-  useEffect(() => {
-    getCurrentUser()
-      .then((response) => {
-        setUser({
-          currentUser: response,
-        });
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   getCurrentUser()
+  //     .then((response) => {
+  //       setUser({
+  //         currentUser: response,
+  //       });
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   return (
     <Section>
       <div className="user">
         <div className="userTitleContainer">
           <h1>내 정보</h1>
-          <h2>d{user.currentUser.name}</h2>
+          {/* <h2>{user.currentUser.name}</h2> */}
           {/* <button className="userInfoEditButton">수정</button> */}
         </div>
         <div className="userContainer">
           <div className="userShow">
             <div className="userShowTop">
-              {userInfo.currentUser.imageUrl ? (
-                <img className="userShowImg" src={userInfo.currentUser.imageUrl} alt={userInfo.currentUser.name} />
+              {userInfo.imageUrl ? (
+                <img className="userShowImg" src={userInfo.imageUrl} alt={userInfo.name} />
               ) : (
                 <div className="text-avatar">
-                  <span>{userInfo.currentUser.name && userInfo.currentUser.name[0]}</span>
+                  <span>{userInfo.name && userInfo.name[0]}</span>
                 </div>
               )}
 
               <div className="userShowTopTitle">
-                <span className="userShowUsername">{userInfo.currentUser.name}</span>
+                <span className="userShowUsername">{userInfo.name}</span>
                 <span className="uerShowUserTitle">Have a nice day!</span>
               </div>
             </div>
@@ -48,7 +48,7 @@ export default function SettingPage({ userInfo }) {
               <span className="userShowTitle">Account Details</span>
               <div className="userShowInfo">
                 <MdPermIdentity className="userShowIcon" />
-                <span className="userShowInfoTitle">id: {userInfo.currentUser.id}</span>
+                <span className="userShowInfoTitle">id: {userInfo.id}</span>
               </div>
               <span className="userShowTitle">Contact Details</span>
               <div className="userShowInfo">
@@ -57,7 +57,7 @@ export default function SettingPage({ userInfo }) {
               </div>
               <div className="userShowInfo">
                 <AiOutlineMail className="userShowIcon" />
-                <span className="userShowInfoTitle">{userInfo.currentUser.email}</span>
+                <span className="userShowInfoTitle">{userInfo.email}</span>
               </div>
             </div>
           </div>
@@ -66,11 +66,11 @@ export default function SettingPage({ userInfo }) {
             <form className="userUpdateForm">
               <div className="userUpdateItem">
                 <label>Username</label>
-                <input type="text" placeholder={userInfo.currentUser.name} className="userUpdateInput" />
+                <input type="text" placeholder={userInfo.name} className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Email</label>
-                <input type="text" placeholder={userInfo.currentUser.email} className="userUpdateInput" />
+                <input type="text" placeholder={userInfo.email} className="userUpdateInput" />
               </div>
               <div className="userUpdateItem">
                 <label>Phone</label>

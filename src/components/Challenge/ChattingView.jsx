@@ -1,26 +1,114 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import ChatCard from "./ChatCard";
-import SendForm from "./SendForm";
+import io from "socket.io-client";
+import { RecieveChatCard, SeneChatCard } from "./ChatCard";
 import Setgoal from "./SetGoal";
 
-export default function ChattingView() {
+const socket = io.connect("http://localhost:80");
+
+export default function ChattingView({ userInfo }) {
+  //const [room, setRoom] = useState("");
+  const room = 1;
+  const [showChat, setShowChat] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [messageList, setMessageList] = useState({ room: "", author: "", message: "", time: "" });
+
+  // const joinRoom = () => {
+  //   if (userInfo.name !== "" && room !== "") {
+  //     socket.emit("join_room", room);
+  //     setShowChat(true);
+  //   }
+  // };
+
+  const [chatArr, setChatArr] = useState([]);
+  const [chat, setChat] = useState("");
+
+  useEffect(() => {
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on("receive message", (message) => {
+      setChatArr((chatArr) => chatArr.concat(message));
+    }); //receive message이벤트에 대한 콜백을 등록해줌
+  }, []);
+
+  const sendMessage = useCallback(() => {
+    socket.emit("send message", {
+      author: userInfo.name,
+      message: chat.message,
+      time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+    });
+    setCurrentMessage("");
+    //버튼을 클릭했을 때 send message이벤트 발생
+  }, [chat]);
+
+  const changeMessage = useCallback(
+    (e) => {
+      setChat({
+        message: e.target.value,
+      });
+      setCurrentMessage(e.target.value);
+    },
+    [chat],
+  );
+
   return (
-    <>
-      <Section>
+    <Section>
+      {/* {!showChat ? (
+        <div className="joinChatContainer">
+          <h3>Join A Chat</h3>
+
+          <input
+            type="text"
+            placeholder="Room ID..."
+            onChange={(event) => {
+              setRoom(event.target.value);
+            }}
+          />
+          <button onClick={joinRoom}>Join A Room</button>
+        </div>
+      ) : ( */}
+      <>
         <div className="top">
-          <h3 id="chattingname">인하대 컴퓨터공학</h3>
+          <h3 id="chattingname">카페 방문 5회 이내</h3>
           <h5 id="personnel">5</h5>
         </div>
         <Setgoal />
         <div className="contentContainer">
-          <ChatCard />
+          {chatArr.map((messageContent) => {
+            return (
+              <div>
+                {userInfo.name === messageContent.author ? (
+                  <SeneChatCard massage={messageContent.message} time={messageContent.time} />
+                ) : (
+                  <RecieveChatCard
+                    massage={messageContent.message}
+                    time={messageContent.time}
+                    author={messageContent.author}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
         <div className="sendContainer">
-          <SendForm />
+          <input
+            type="text"
+            placeholder="메시지를 입력하세요"
+            value={currentMessage}
+            onChange={changeMessage}
+            onKeyPress={(event) => {
+              event.key === "Enter" && sendMessage();
+            }}
+          />
+          <button onClick={sendMessage}>전송</button>
         </div>
-      </Section>
-    </>
+      </>
+      {/* )} */}
+    </Section>
   );
 }
 
@@ -52,7 +140,7 @@ const Section = styled.section`
 
     ::-webkit-scrollbar {
       background-color: #efecf5;
-      width: 0.6vw;
+      width: 0.4vw;
     }
 
     ::-webkit-scrollbar-thumb {

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-// import { format } from "date-fns";
+
+import Modal from "../common/Modal";
 
 const AccountBookPost = ({ onSaveData, handleCancel }) => {
   // const [date, setDate] = useState(new Date());
@@ -45,7 +44,15 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
   };
 
   const handleOCRChange = (e) => {
-    setForm(e.target.files[0]);
+    e.preventDefault();
+    setForm({
+      inex: "지출",
+      category: "",
+      content: "설빙서울마곡나루점",
+      account: 11900,
+      date: "",
+      memo: "",
+    });
   };
 
   //이미지 전송
@@ -88,7 +95,15 @@ const AccountBookPost = ({ onSaveData, handleCancel }) => {
           </div>
           <div class="formItem">
             <label htmlFor="inex">
-              <input className="formInput" type="radio" name="inex" value="지출" onChange={handleChange} required />
+              <input
+                className="formInput"
+                type="radio"
+                name="inex"
+                value="지출"
+                onChange={handleChange}
+                required
+                checked={form.inex === "지출"}
+              />
               지출
             </label>
             <label htmlFor="inex">

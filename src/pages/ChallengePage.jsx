@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import ChattingMain from "../components/Challenge/ChattingMain";
 
-export default function ChallengePage() {
+export default function ChallengePage({ userInfo }) {
   return (
     <Section>
-      <ChattingMain />
+      <ChattingMain user={userInfo} />
     </Section>
   );
 }

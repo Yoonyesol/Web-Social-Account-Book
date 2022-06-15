@@ -7,7 +7,6 @@ import { Link, Navigate } from "react-router-dom";
 import fbLogo from "../img/fb-logo.png";
 import googleLogo from "../img/google-logo.png";
 import githubLogo from "../img/github-logo.png";
-import Alert from "react-s-alert";
 
 export default function LoginPage({ userInfo }) {
   let location = useLocation(); //location 객체를 location 변수에 저~장
@@ -76,57 +75,55 @@ function SignupForm() {
 
     signup(signUpRequest)
       .then((response) => {
-        Alert.success("회원가입되었습니다! 로그인해주세요.");
-        history.push("/login");
+        alert("회원가입되었습니다! 로그인해주세요.");
+        history("/login");
       })
       .catch((error) => {
-        Alert.error((error && error.message) || "회원가입 실패! 다시 시도해주세요.");
+        alert((error && error.message) || "회원가입 실패! 다시 시도해주세요.");
       });
   };
 
   return (
-    <Section>
-      <form onSubmit={handleSubmit}>
-        <div className="form-item">
-          <input
-            type="text"
-            name="name"
-            className="form-control"
-            placeholder="Name"
-            value={signInfo.name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-item">
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="Email"
-            value={signInfo.email}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-item">
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            placeholder="Password"
-            value={signInfo.password}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-item">
-          <button type="submit" className="singupBtn">
-            Sign Up
-          </button>
-        </div>
-      </form>
-    </Section>
+    <form onSubmit={handleSubmit}>
+      <div className="form-item">
+        <input
+          type="text"
+          name="name"
+          className="form-control"
+          placeholder="Name"
+          value={signInfo.name}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="form-item">
+        <input
+          type="email"
+          name="email"
+          className="form-control"
+          placeholder="Email"
+          value={signInfo.email}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="form-item">
+        <input
+          type="password"
+          name="password"
+          className="form-control"
+          placeholder="Password"
+          value={signInfo.password}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="form-item">
+        <button type="submit" className="singupBtn">
+          Sign Up
+        </button>
+      </div>
+    </form>
   );
 }
 

@@ -10,9 +10,7 @@ const Setgoal = () => {
             <h3>목표</h3>
             <button>목표 설정</button>
           </div>
-          <div>김인하: 한달에 커피 5잔 이내</div>
-          <div>정인하: 택시비 30,000원 이하</div>
-          <div>원인하: 편의점 4회 이하 방문</div>
+          <div>카페 방문 5회 이내</div>
         </SetCard>
       </Card>
     </>

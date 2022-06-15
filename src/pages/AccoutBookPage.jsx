@@ -27,7 +27,7 @@ const Section = styled.section`
   height: 100%;
 
   .grid {
-    margin: 5vw 18vw;
+    margin: 5vw 10vw;
     display: flex;
     flex-direction: column;
     height: 100%;

@@ -50,8 +50,8 @@ export default function EarningPieChart() {
     <Section>
       <div className="top">
         <div className="info">
-          <h4>한달 지출</h4>
-          <h1>304,032,424원</h1>
+          <h4>1년 지출</h4>
+          <h1>3,032,926원</h1>
           <div className="growth">
             <span>+2.34%</span>
           </div>

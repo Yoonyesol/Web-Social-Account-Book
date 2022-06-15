@@ -1,11 +1,15 @@
 import React from "react";
 
-import { FaPen } from "react-icons/fa";
+import { AiFillFolderOpen } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
 
-const Td = ({ item, handleRemove, handleEdit }) => {
+const Td = ({ item, handleRemove, handleEdit, user }) => {
   const onRemove = () => {
-    handleRemove(item.id);
+    if (user.name === item.author) {
+      handleRemove(item.id);
+    } else {
+      alert("삭제 권한이 없습니다.");
+    }
   };
 
   const onEdit = () => {
@@ -19,7 +23,7 @@ const Td = ({ item, handleRemove, handleEdit }) => {
       <td>{item.author}</td>
       <td>{item.lastedit}</td>
       <td>
-        <FaPen onClick={onEdit} />
+        <AiFillFolderOpen onClick={onEdit} />
       </td>
       <td>
         <FaTrashAlt onClick={onRemove} />

@@ -1,64 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-const ChatCard = () => {
+export const RecieveChatCard = ({ massage, time, author }) => {
   return (
-    <>
-      <Card>
-        <ReceiverName>정인하</ReceiverName>
-        <ReceiverCard>소셜가계부</ReceiverCard>
-        <ReceiverDate>2020-01-01</ReceiverDate>
-      </Card>
-      <Card>
-        <ReceiverName>정인하</ReceiverName>
-        <ReceiverCard>소셜가계부</ReceiverCard>
-        <ReceiverDate>2020-01-01</ReceiverDate>
-      </Card>
-      <Card>
-        <SenderCard>김인하</SenderCard>
-        <SenderDate>2020-01-02</SenderDate>
-      </Card>
-      <Card>
-        <ReceiverName>정인하</ReceiverName>
-        <ReceiverCard>소셜가계부</ReceiverCard>
-        <ReceiverDate>2020-01-01</ReceiverDate>
-      </Card>
-      <Card>
-        <SenderCard>김인하</SenderCard>
-        <SenderDate>2020-01-02</SenderDate>
-      </Card>
-      <Card>
-        <ReceiverName>정인하</ReceiverName>
-        <ReceiverCard>소셜가계부</ReceiverCard>
-        <ReceiverDate>2020-01-01</ReceiverDate>
-      </Card>
-      <Card>
-        <SenderCard>김인하</SenderCard>
-        <SenderDate>2020-01-02</SenderDate>
-      </Card>
-      <Card>
-        <ReceiverName>정인하</ReceiverName>
-        <ReceiverCard>소셜가계부</ReceiverCard>
-        <ReceiverDate>2020-01-01</ReceiverDate>
-      </Card>
-      <Card>
-        <SenderCard>김인하</SenderCard>
-        <SenderDate>2020-01-02</SenderDate>
-      </Card>
-      <Card>
-        <ReceiverName>정인하</ReceiverName>
-        <ReceiverCard>소셜가계부</ReceiverCard>
-        <ReceiverDate>2020-01-01</ReceiverDate>
-      </Card>
-      <Card>
-        <SenderCard>김인하</SenderCard>
-        <SenderDate>2020-01-02</SenderDate>
-      </Card>
-    </>
+    <Card>
+      <ReceiverName>{author}</ReceiverName>
+      <ReceiverCard>{massage}</ReceiverCard>
+      <ReceiverDate>{time}</ReceiverDate>
+    </Card>
   );
 };
 
-export default ChatCard;
+export const SeneChatCard = ({ massage, time }) => {
+  return (
+    <Card>
+      <SenderCard>{massage}</SenderCard>
+      <SenderDate>{time}</SenderDate>
+    </Card>
+  );
+};
 
 const Card = styled.div`
   width: 100%;

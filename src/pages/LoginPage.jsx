@@ -7,7 +7,6 @@ import { Link, Navigate } from "react-router-dom";
 import fbLogo from "../img/fb-logo.png";
 import googleLogo from "../img/google-logo.png";
 import githubLogo from "../img/github-logo.png";
-import Alert from "react-s-alert";
 
 function LoginPage({ userInfo }) {
   let location = useLocation(); //location 객체를 location 변수에 저~장
@@ -18,7 +17,7 @@ function LoginPage({ userInfo }) {
   const componentDidMount = () => {
     if (location.state && location.state.error) {
       setTimeout(() => {
-        Alert.error(location.state.error, {
+        alert(location.state.error, {
           timeout: 5000,
         });
         history.replace({

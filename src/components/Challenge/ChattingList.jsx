@@ -3,16 +3,13 @@ import styled from "styled-components";
 import MsgCard from "./MsgCard";
 
 export default function ChattingSidebar() {
-  const html = document.querySelector("html");
   const dummyData = [
-    { nickname: "채팅방01", createdAt: "2020-01-01", content: "test-01" },
-    { nickname: "채팅방02", createdAt: "2020-01-01", content: "test-02" },
-    { nickname: "채팅방03", createdAt: "2020-01-01", content: "test-03" },
-    { nickname: "채팅방04", createdAt: "2020-01-01", content: "test-04" },
-    { nickname: "채팅방05", createdAt: "2020-01-01", content: "test-05" },
-    { nickname: "채팅방06", createdAt: "2020-01-01", content: "test-06" },
-    { nickname: "채팅방07", createdAt: "2020-01-01", content: "test-07" },
-    { nickname: "채팅방08", createdAt: "2020-01-01", content: "test-08" },
+    { nickname: "카페 방문 5회 이내", createdAt: "2022-04-01", content: "test-01" },
+    { nickname: "편의점 방문 9회 이내", createdAt: "2022-04-30", content: "test-02" },
+    { nickname: "총 지출 30만원", createdAt: "2022-05-01", content: "test-03" },
+    { nickname: "예산 40만원", createdAt: "2022-05-03", content: "test-04" },
+    { nickname: "100만원 수입", createdAt: "2022-05-27", content: "test-05" },
+    { nickname: "120만원 수입", createdAt: "2022-06-04", content: "test-06" },
   ];
 
   return (
@@ -20,7 +17,7 @@ export default function ChattingSidebar() {
       <Section>
         <div className="top">
           <div className="brand">
-            <span>채팅목록</span>
+            <span>챌린지 목록</span>
           </div>
           <div className="listContainer">
             <ListBox>
@@ -44,7 +41,7 @@ const ListBox = styled.div`
 `;
 
 const Section = styled.section`
-  flex: 1;
+  flex: 2;
   margin-right: 2rem;
   background-color: #efecf5;
   height: 93vh;
